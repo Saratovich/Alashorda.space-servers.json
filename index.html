@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Сервера Black Russia</title>
+</head>
+<body>
+  <h1>Список серверов</h1>
+  <ul id="servers"></ul>
+
+  <script>
+    fetch("servers.json")
+      .then(r => r.json())
+      .then(data => {
+        let list = document.getElementById("servers");
+        data.forEach(srv => {
+          let li = document.createElement("li");
+          li.innerHTML = `
+            <b style="color:#${srv.color}">${srv.name}</b><br>
+            Онлайн: ${srv.online}/${srv.maxonline}<br>
+            IP: ${srv.ip}:${srv.port}<br>
+            X2: ${srv.x2}
+          `;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
